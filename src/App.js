@@ -1,7 +1,19 @@
-import './App.css';
+import './styles/App.css';
 import {useEffect, useState} from 'react';
-import Axios from 'axios';
 import axios from 'axios';
+import { Card, ListGroup } from 'react-bootstrap';
+
+
+
+/* 
+ToDo:
+move all of the code to the diffent folders
+maybe make the types the image that pokemon uses
+get pokemon details page running
+add bars for stats
+*/
+
+
 function App() {
 //setting use states
 //pokemon and setting it to an object
@@ -42,7 +54,7 @@ const searchPokemon = () => {
   //we use back ticks for urls/hyperlinks
   //using the dollor sign to append the pokemonname to the link
   //then use the then promise to get a responce then log response
-  Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then((Response)=> {
+  axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then((Response)=> {
     setPokemon({name: pokemonName, 
        species: Response.data.species.name,
        Img: Response.data.sprites.front_default, 
@@ -70,21 +82,27 @@ const searchPokemon = () => {
         />
       <button onClick={searchPokemon}>Search Pokemon</button>
       </div>
-      <div className='DisplayCard'>
+      <div className={`DisplayCard`}>
         {!pokemonChosen ? (
         <h1>Please chooose a Pokemon</h1>
         ) : (
           <>
-        <h1>{pokemon.name}</h1>
-        <img src={pokemon.Img}  alt="des"/>
-        <h3>Species: {pokemon.species}</h3>
-        <h3>Type: {pokemon.type}</h3>
-        <h4>Hp: {pokemon.hp}</h4>
-        <h4>Attack: {pokemon.attack}</h4>
-        <h4>Defense: {pokemon.defense}</h4>
-        <h4>Special Attack: {pokemon.specialattack}</h4>
-        <h4>Special Defense: {pokemon.specialdefense}</h4>
-        <h4>Speed: {pokemon.speed}</h4>
+        <Card className = {`PokeCard ${pokemon.type}`} border ="primary" style={{witdh: '18rem'}}>
+          <Card.Header>{pokemon.name}</Card.Header>
+          <Card.Img variant='top' src={pokemon.Img}/>
+          <Card.Body>
+        <ListGroup className="list-group-flush">
+        <ListGroup.Item>Species: {pokemon.species}</ListGroup.Item>
+        <ListGroup.Item>Type: {pokemon.type}</ListGroup.Item>
+        <ListGroup.Item>Hp: {pokemon.hp}</ListGroup.Item>
+        <ListGroup.Item>Attack: {pokemon.attack}</ListGroup.Item>
+        <ListGroup.Item>Defense: {pokemon.defense}</ListGroup.Item>
+        <ListGroup.Item>Special Attack: {pokemon.specialattack}</ListGroup.Item>
+        <ListGroup.Item>Special Defense: {pokemon.specialdefense}</ListGroup.Item>
+        <ListGroup.Item>Speed: {pokemon.speed}</ListGroup.Item>
+        </ListGroup>
+        </Card.Body>
+        </Card>
         </>
         )}
         </div>
