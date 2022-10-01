@@ -2,6 +2,7 @@ import '../styles/App.css';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import PokeCard from '../components/cards/PokeCard';
+import api from '../services/api';
 
 
 /* 
@@ -25,7 +26,7 @@ const [text,setText] = useState("");
 useEffect(()=>{
   //loading in all the pokemon from the pokedex
   const loadPokemon = async () => {
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=2000`);
+    const response = await api.get(`/pokemon/?limit=2000`);
     console.log(response.data);
     setPokemonSearch(response.data.data);
   }
@@ -36,6 +37,7 @@ useEffect(()=>{
 
 const [pokemonName,setPokemonName] = useState("");
 const [pokemonChosen,setPokemonChosen] = useState(false);
+//the setter and getter mthods and the data inside the useState is that datafeilds
 const [pokemon,setPokemon] = useState({ 
   species: "",
   Img: "", 
@@ -53,7 +55,7 @@ const searchPokemon = () => {
   //we use back ticks for urls/hyperlinks
   //using the dollor sign to append the pokemonname to the link
   //then use the then promise to get a responce then log response
-  axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then((Response)=> {
+  api.get(`/pokemon/${pokemonName}`).then((Response)=> {
     setPokemon({name: pokemonName, 
        species: Response.data.species.name,
        Img: Response.data.sprites.front_default, 
@@ -63,7 +65,7 @@ const searchPokemon = () => {
        specialattack: Response.data.stats[3].base_stat,
        specialdefense: Response.data.stats[4].base_stat, 
        speed: Response.data.stats[5].base_stat,
-       type: Response.data.types[0].type.name,
+       type: Response.data.types,
       });
       setPokemonChosen(true);
       //setting the input text
@@ -86,6 +88,7 @@ const searchPokemon = () => {
       name = {pokemon.name}
       type = {pokemon.type}
       Img = {pokemon.Img}
+      click = {true}
       />
     </div>
   );

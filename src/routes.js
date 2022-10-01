@@ -10,10 +10,8 @@ import Details from "./pages/Details";
         <div className="app">
             <BrowserRouter>
             <Routes>
-            <Route path="/" element = {<Search/>}>
-            </Route>
-            <Route path="/details" element = {<Details/>}>
-            </Route>
+            <Route exact path="/" index element = {<Search/>}/>
+            <Route path="/details/:name/*" element = {<Details/>}/>
             </Routes>
             </BrowserRouter>
         </div>
