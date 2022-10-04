@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // we want the card to be clickable to route to the details page
 //it seems that the proper way to do componets is to have the bootstrap data on the page 
 //and the data is prosessed in here
-const PokeCard = ({name,type,Img,click,pokemonChosen}) => {
+const PokeCard = ({name,type,Img,pokemonChosen}) => {
 // we want to return all of the proseeced data
     return(
         //card container
@@ -16,7 +16,7 @@ const PokeCard = ({name,type,Img,click,pokemonChosen}) => {
         ) : (
           <>
           <Link to={`/details/${name}`}>
-        <Card className = {`PokeCard ${type}`} border ="primary" style={{witdh: '18rem'}}>
+        <Card className = {`PokeCard ${type[0].type.name}`} border ="primary" style={{witdh: '18rem'}}>
           <Card.Header>{name}</Card.Header>
           <Card.Img variant='top' src={Img}/>
           <Card.Body>

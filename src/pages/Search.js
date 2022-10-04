@@ -88,7 +88,6 @@ const searchPokemon = () => {
       name = {pokemon.name}
       type = {pokemon.type}
       Img = {pokemon.Img}
-      click = {true}
       />
     </div>
   );
