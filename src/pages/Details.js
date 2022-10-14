@@ -29,15 +29,21 @@ const [pokemonChosen,setPokemonChosen] = useState(false);
             //pull data from the searchpage 
             //use that data to populate the details page
             // define the load
-            const loadPokemon = () => {
+            function loadPokemon () {
                 api.get(`/pokemon/${name}`).then((Response) => {
                     // this is going to get the detials from the api from the response and load it into the 
                     //loadDetails fucntion
+                    if(Response.status == 200){
                     loadDetails(Response.data);
+                    }
                 })
+                .catch((error) => {
+                    console.log(error);
+                  });
             }
             //running the fuction
             loadPokemon();
+           
         },[]);
 
 
@@ -73,14 +79,13 @@ async function loadDetails(poke) {
         };
 
         //setting the details using the obj we created
-
+       
         setPokemon(obj);
         setPokemonChosen(true);
         
     } catch(error) {
         console.log(error);
     }
-
 }
 
 
@@ -100,13 +105,14 @@ async function loadDetails(poke) {
         Img = {pokemon.Img}
          
         disabled />
+        
         </Col>
         <Col xs={12} md={8}>
         </Col>
         </Row>
         <Row>
         <Col xs={12}>
-            
+        <PokemonStats stats={pokemon.stats} type={pokemon.types}/>
         </Col>
         </Row>
        </Container>     
