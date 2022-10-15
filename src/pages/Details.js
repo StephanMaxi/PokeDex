@@ -6,6 +6,8 @@ import api from '../services/api';
 import { Col, Container, Row } from 'react-bootstrap';
 import PokeCard from '../components/cards/PokeCard';
 import PokemonStats from '../components/cards/PokemonStats';
+import Pokemoninfo from '../components/cards/PokemonInfo';
+import PokeText from '../components/cards/PokeText';
 
 
 
@@ -55,7 +57,18 @@ async function loadDetails(poke) {
       //  let pokemonTypes = await api.get(`type/${poke.type}`);
         //apends the pokemonSpecies and gets the data.evolutionchain.url 
         let pokeEvolution = await axios.get(pokemonSpecies.data.evolution_chain.url);
-        console.log(pokeEvolution);
+        console.log(pokemonSpecies);
+
+        //need to add the text for all of the latest versions
+        var sword_flavor_text = "";
+        var shield_flavor_text = "";
+        var flavor_text_default = "";
+
+        pokemonSpecies.data.flavor_text_entries.map((item) =>{
+            if (item.language.name != "en") return false;
+            
+        });
+
         var abilities = "";
             poke.abilities.map((item,index) => (
                 abilities += `${item.ability.name}${
@@ -76,6 +89,7 @@ async function loadDetails(poke) {
             capture_rate: pokemonSpecies.data.capture_rate,
             stats: poke.stats,
             evolution: pokeEvolution.data.chain,
+            flavor_text: pokemonSpecies.data.flavor_text_entries.flavor_text,
         };
 
         //setting the details using the obj we created
@@ -89,7 +103,7 @@ async function loadDetails(poke) {
 }
 
 
-
+console.log(pokemon);
 
 // the only issue that i see is the making the arrows go left when it is a straint evo chian
 // and it going diagonal if there are diffent evo forms
@@ -97,7 +111,7 @@ async function loadDetails(poke) {
         <div className='App'>
     <Container fluid>
     <Row>
-        <Col xs={6} md={4}>
+        <Col xs={12} md={6}>
     <PokeCard   
       pokemonChosen={pokemonChosen.valueOf(true)}
        name = {name}
@@ -107,10 +121,18 @@ async function loadDetails(poke) {
         disabled />
         
         </Col>
-        <Col xs={12} md={8}>
+        <Col xs={12} md={6}>
+            <Pokemoninfo 
+            height = {pokemon.height} 
+            weight = {pokemon.weight}
+            capture_rate = {pokemon.capture_rate}
+            gender_rate = {pokemon.gender_rate} 
+            abilities = {pokemon.abilities}
+            />
+            <PokeText
+            flavor_text = {pokemon.flavor_text}
+            />
         </Col>
-        </Row>
-        <Row>
         <Col xs={12}>
         <PokemonStats stats={pokemon.stats} type={pokemon.types}/>
         </Col>
