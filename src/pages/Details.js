@@ -35,7 +35,7 @@ const [pokemonChosen,setPokemonChosen] = useState(false);
                 api.get(`/pokemon/${name}`).then((Response) => {
                     // this is going to get the detials from the api from the response and load it into the 
                     //loadDetails fucntion
-                    if(Response.status == 200){
+                    if(Response.status === 200){
                     loadDetails(Response.data);
                     }
                 })
@@ -63,10 +63,15 @@ async function loadDetails(poke) {
         var sword_flavor_text = "";
         var shield_flavor_text = "";
         var flavor_text_default = "";
-
+        //map to get the latest english flavor text
         pokemonSpecies.data.flavor_text_entries.map((item) =>{
-            if (item.language.name != "en") return false;
-            
+            if (item.language.name !== "en") return false;
+            if(item.version.name === "sword"){
+                sword_flavor_text = item.flavor_text;
+            }else if (item.version.name === "shield"){
+                shield_flavor_text = item.flavor_text;
+            }
+            flavor_text_default = item.flavor_text;
         });
 
         var abilities = "";
@@ -90,6 +95,9 @@ async function loadDetails(poke) {
             stats: poke.stats,
             evolution: pokeEvolution.data.chain,
             flavor_text: pokemonSpecies.data.flavor_text_entries.flavor_text,
+            sword_flavor_text,
+            shield_flavor_text,
+            flavor_text_default,
         };
 
         //setting the details using the obj we created
@@ -130,7 +138,9 @@ console.log(pokemon);
             abilities = {pokemon.abilities}
             />
             <PokeText
-            flavor_text = {pokemon.flavor_text}
+            sword_flavor_text = {pokemon.sword_flavor_text}
+            shield_flavor_text = {pokemon.shield_flavor_text}
+            flavor_text_default = {pokemon.flavor_text_default}
             />
         </Col>
         <Col xs={12}>
