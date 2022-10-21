@@ -43,9 +43,10 @@
 
 .DisplayCard {
   display: flex;
-  flex-direction:  column;
+  flex-direction: column;
   align-items: center;
-  padding-top: 50px;
+  border-radius: 10px;
+  padding: 14px 12px;
   
 }
 .DisplayCard h4, h3 {
@@ -81,58 +82,128 @@
  /*color types*/
 
  .normal {
-  background-color: var(--normal);
+  background-color: var(--normal)!important;
  }
  .fire {
   background-color: var(--fire) !important;
  }
  .grass {
-  background-color: var(--grass);
+  background-color: var(--grass)!important;
  }
  .posion {
-  background-color: var(--posion);
+  background-color: var(--posion)!important;
  }
  .electric {
-  background-color: var(--electric);
+  background-color: var(--electric)!important;
  }
  .ice {
-  background-color: var(--ice);
+  background-color: var(--ice)!important;
  }
  .fighting {
-  background-color: var(--fighting);
+  background-color: var(--fighting)!important;
  }
  .fairy {
-  background-color: var(--fairy);
+  background-color: var(--fairy)!important;
  }
  .ghost {
-  background-color: var(--ghost);
+  background-color: var(--ghost)!important;
  }
  .flying {
-  background-color: var(--flying);
+  background-color: var(--flying)!important;
  }
  .water {
-  background-color: var(--water);
+  background-color: var(--water)!important;
  }
  .ground {
-  background-color: var(--ground);
+  background-color: var(--ground)!important;
  }
  .dark {
-  background-color: var(--dark);
+  background-color: var(--dark)!important;
  }
  .psychic {
-  background-color: var(--psychic);
+  background-color: var(--psychic)!important;
  }
  .steel {
-  background-color: var(--steel);
+  background-color: var(--steel)!important;
  }
  .rock {
-  background-color: var(--rock);
+  background-color: var(--rock)!important;
  }
  .dragon {
-  background-color: var(--dragon);
+  background-color: var(--dragon)!important;
  }
  .bug {
-  background-color: var(--bug);
+  background-color: var(--bug)!important;
  }
 
  /*text colors*/
+
+
+
+ /*Details Page*/
+
+ .overview {
+  line-height: 30px;
+  font-size: 20px;
+  font-family: "OldSansBlack";
+}
+.container-info {
+  padding: 14px 10px;
+  border-radius: 10px;
+}
+
+.info-item {
+  width: 50%;
+  margin-bottom: 30px;
+}
+
+
+/* Info Page */
+/* increase the size and move the button */
+.container-versions button{
+  
+  width: 70px;
+  height: 40px;
+  justify-content: center;
+
+}
+
+/* justify content makes a space between each of the bars */
+/* flex wrap to let it be more fluid */
+/* display flex  to allow it to move*/
+.container-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-radius: 15px;
+  padding: 14px 15px;
+}
+
+.bar-item{
+  width: 100px;
+}
+/* make the height bar 200 */
+.bar{
+  height: 200px;
+  position: relative;
+  border-radius: 4px;
+}
+
+/* move the text under and in the middle of the bar */
+.bar-active {
+  width: 100px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+/* postionn  absolute means that the the elemnt is removed from the doc flow and it can move and not disrupt the other elemnts  */
+.container-label {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  justify-content: center;
+}
+

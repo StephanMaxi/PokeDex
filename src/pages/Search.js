@@ -1,4 +1,3 @@
-import '../styles/App.css';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import PokeCard from '../components/cards/PokeCard';

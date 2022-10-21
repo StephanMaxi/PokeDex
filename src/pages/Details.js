@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import '../styles/App.css';
 import axios from 'axios';
 import api from '../services/api';
 import { Col, Container, Row } from 'react-bootstrap';
@@ -56,7 +55,7 @@ async function loadDetails(poke) {
         let pokemonSpecies = await api.get(`/pokemon-species/${name}`);
       //  let pokemonTypes = await api.get(`type/${poke.type}`);
         //apends the pokemonSpecies and gets the data.evolutionchain.url 
-        let pokeEvolution = await axios.get(pokemonSpecies.data.evolution_chain.url);
+        
         console.log(pokemonSpecies);
 
         //need to add the text for all of the latest versions
@@ -93,7 +92,6 @@ async function loadDetails(poke) {
             gender_rate: pokemonSpecies.data.gender_rate,
             capture_rate: pokemonSpecies.data.capture_rate,
             stats: poke.stats,
-            evolution: pokeEvolution.data.chain,
             flavor_text: pokemonSpecies.data.flavor_text_entries.flavor_text,
             sword_flavor_text,
             shield_flavor_text,

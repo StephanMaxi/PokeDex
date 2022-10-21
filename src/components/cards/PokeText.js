@@ -15,7 +15,7 @@ return(
         <h3 className="text-center text-md-left overview">
             {version === "sword" ? sword_flavor_text : shield_flavor_text}
         </h3>
-        <div className="container-versions d-flex justify-content-center justify-content-md-start mt-4">
+        <div className="container-versions d-flex justify-content-center mt-4">
             <button
               className={`${version === "sword" && version} mr-2`}
               onClick={() => setVersion("sword")}
