@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import api from '../services/api';
+import pokeapi from '../services/pokeapi';
 import { Col, Container, Row } from 'react-bootstrap';
 import PokeCard from '../components/cards/PokeCard';
 import PokemonStats from '../components/cards/PokemonStats';
 import Pokemoninfo from '../components/cards/PokemonInfo';
 import PokeText from '../components/cards/PokeText';
+import PokemonEvolution from '../components/cards/PokemonEvolve';
 
 
 
@@ -14,7 +15,7 @@ import PokeText from '../components/cards/PokeText';
 //Things that want to have on the details page
 //  Name,Pic,Stats with moving bars on page load,Evolution Chain, Species,Hieght, Weight, Ablities, catch rate, gender ratio wirh bar,weaknesses
 //props allow the funtion to be a matched to a pokemon
-function Details(...props) {
+function Details() {
 const {name} = useParams();
 const [pokemon,setPokemon] = useState({});
 const [pokemonChosen,setPokemonChosen] = useState(false);
@@ -31,7 +32,7 @@ const [pokemonChosen,setPokemonChosen] = useState(false);
             //use that data to populate the details page
             // define the load
             function loadPokemon () {
-                api.get(`/pokemon/${name}`).then((Response) => {
+                pokeapi.get(`/pokemon/${name}`).then((Response) => {
                     // this is going to get the detials from the api from the response and load it into the 
                     //loadDetails fucntion
                     if(Response.status === 200){
@@ -52,10 +53,10 @@ async function loadDetails(poke) {
     //try 
     //need to load everything thats not in the main json
     try {
-        let pokemonSpecies = await api.get(`/pokemon-species/${name}`);
-      //  let pokemonTypes = await api.get(`type/${poke.type}`);
+        let pokemonSpecies = await pokeapi.get(`/pokemon-species/${name}`);
+      //  let pokemonTypes = await pokeapi.get(`type/${poke.type}`);
         //apends the pokemonSpecies and gets the data.evolutionchain.url 
-        
+        let pokemonEvolution = await axios.get(pokemonSpecies.data.evolution_chain.url);
         console.log(pokemonSpecies);
 
         //need to add the text for all of the latest versions
@@ -96,6 +97,7 @@ async function loadDetails(poke) {
             sword_flavor_text,
             shield_flavor_text,
             flavor_text_default,
+            evolution : pokemonEvolution.data.chain,          
         };
 
         //setting the details using the obj we created
@@ -145,6 +147,7 @@ console.log(pokemon);
         <PokemonStats stats={pokemon.stats} type={pokemon.types}/>
         </Col>
         </Row>
+        <PokemonEvolution data={pokemon.evolution} type={pokemon.types}/>
        </Container>     
    </div>
     );

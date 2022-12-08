@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import PokeCard from '../components/cards/PokeCard';
-import api from '../services/api';
+import pokeapi from '../services/pokeapi';
 
 
 /* 
@@ -25,7 +25,7 @@ const [text,setText] = useState("");
 useEffect(()=>{
   //loading in all the pokemon from the pokedex
   const loadPokemon = async () => {
-    const response = await api.get(`/pokemon/?limit=2000`);
+    const response = await pokeapi.get(`/pokemon/?limit=2000`);
     console.log(response.data);
     setPokemonSearch(response.data.data);
   }
@@ -54,7 +54,7 @@ const searchPokemon = () => {
   //we use back ticks for urls/hyperlinks
   //using the dollor sign to append the pokemonname to the link
   //then use the then promise to get a responce then log response
-  api.get(`/pokemon/${pokemonName}`).then((Response)=> {
+  pokeapi.get(`/pokemon/${pokemonName}`).then((Response)=> {
     setPokemon({name: pokemonName, 
        species: Response.data.species.name,
        Img: Response.data.sprites.front_default, 
