@@ -3,7 +3,8 @@ import { BrowserRouter,Route,Routes  } from "react-router-dom";
 
 import Search from "./pages/Search";
 import Details from "./pages/Details";
-import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 
  function Routers(){
@@ -11,7 +12,8 @@ import Home from "./pages/Home";
         <div className="app">
             <BrowserRouter>
             <Routes>
-            <Route exact path="/" index element = {<Home/>}/>
+            <Route exact path="/" index element = {<Login/>}/>
+            <Route path="/register"  element = {<Register/>}/>
             <Route path="/search" element = {<Search/>}/>
             <Route path="/details/:name/*" element = {<Details/>}/>
             </Routes>
